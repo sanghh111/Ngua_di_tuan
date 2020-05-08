@@ -1,8 +1,8 @@
 #include<iostream>
 using namespace std;
 int a[8][8]={-1};
-int X[8]={-2 , -2 , -1 , -1 , 1 , 1 , 2 , 2 };
-int Y[8]={ -1,  1 , -2 , 2 , -2 , 2 ,-1 , 1 };
+int X[8]={-1,-2,-2,-1,1,2,2,1};
+int Y[8]={2,1,-1,-2,-2,-1,1,2};
 int dem=1;
 void khoi_tao()
 {
@@ -42,5 +42,5 @@ dem--;
 main()
 {
 	khoi_tao();
-	Di_tuan(7,7);
+	Di_tuan(1,1);
 }

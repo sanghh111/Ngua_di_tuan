@@ -1,1 +1,1 @@
-print(2%2)
+from pythonds.graphs import Graph

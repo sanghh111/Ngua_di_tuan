@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.py": "python",
+        "*.json": "python",
+        "*.sqlite": "python",
+        "iostream": "cpp"
+    }
+}
