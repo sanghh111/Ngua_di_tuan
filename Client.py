@@ -1,5 +1,6 @@
 from tkinter import Canvas,Button,Tk,PhotoImage,NW,Label,Frame
 from time import sleep
+from kight_tours_warnsdorffs import *
 # import Test_đi_tuan
 from PIL import Image, ImageTk
 class Windown(Frame):
@@ -65,12 +66,32 @@ class Windown(Frame):
     def tao_ngua(self,toa_doX,toa_doY):
         x=50*toa_doX
         y=50*toa_doY
+
+        # initialize tour kight's
+        kt=Chess_board(8,8)
+        kt.tour(1,(toa_doX,toa_doY))
+        path=kt.get_path()
+        path=path[1:65]
+        # call file IMG 
         img= Image.open("Image\\ngua.png")
         # wid=hei=self.hei_wid/self.element
+        # resize Image
         img= img.resize((50, 50), Image.ANTIALIAS)
         img.save("Image\\nguax50.png")
         self.png = PhotoImage(file="Image\\nguax50.png")
         self.ngua=self.can.create_image(x,y,anchor=NW, image=self.png)
+        dem=1
+        self.can.create_text(x+25,y+25,text=dem,fill="blue")
+        dem+=1
         self.can.update()
+        for a in path:
+            sleep(0.05)
+            self.can.delete(self.ngua)
+            self.can.update()
+            sleep(0.05)
+            self.ngua=self.can.create_image(a[0]*50,a[1]*50,anchor=NW, image=self.png)
+            self.can.create_text(a[0]*50+25,a[1]*50+25,text=dem,fill="blue")
+            dem+=1
+            self.can.update()
         pass    
 app = Windown(8,Tk())
