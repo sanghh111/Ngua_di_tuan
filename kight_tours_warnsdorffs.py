@@ -61,13 +61,14 @@ class Chess_board:
             else:
                 return 
 
-    def print_board(self):
-        print ("  ")
-        print ("------")
-        for elem in self.board:
-            print (elem)
-        print ("------")
-        print ("  ")
-
+    def Check_nextmove(self,to_visit,dem):
+        arr=[]
+        for move in self.move:
+            nx=to_visit[0]+move[0]
+            ny=to_visit[1]+move[1]
+            if (nx>=0 and nx<8 and ny>=0 and ny<8 and self.board[nx][ny]>=dem ):
+                a=(nx,ny)
+                arr.append(a)
+        return arr
     def get_path(self):
         return self.path
