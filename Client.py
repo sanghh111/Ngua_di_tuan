@@ -3,6 +3,7 @@ from time import sleep
 from kight_tours_warnsdorffs import *
 # import Test_đi_tuan
 from PIL import Image, ImageTk
+import os
 class Windown(Frame):
     #contrustor
     def __init__(self, element,master=None,):
@@ -111,15 +112,18 @@ class Windown(Frame):
             arr=self.kt.Check_nextmove(self.present,self.dem)
             for i in arr:
                 self.can.itemconfig(self.arr[i[1]][i[0]],fill="red")
+                # os.system("pause")
                 self.can.update()
-            sleep(0.5)
+                # os.system("pause")
+            sleep(0.05)
             self.can.itemconfig(self.arr[a[1]][a[0]],fill="#51BCA7")
+            # os.system("pause")
             self.can.update()
-            sleep(0.5)
+            sleep(0.05)
             for i in arr:
                 self.can.itemconfig(self.arr[i[1]][i[0]],fill=color_cell)
                 self.can.update()
-            sleep(0.5)
+            sleep(0.05)
             self.can.delete(self.ngua)  
             self.can.update()
             sleep(0.05)
@@ -129,19 +133,33 @@ class Windown(Frame):
             self.can.update()
             self.present=a
             self.path=self.path[1:]
+            if(self.path==[]):
+                self.finish()
 
     def skip_move(self):
         self.at_dg_chay=False
-        for a in self.path:
-            sleep(0.5)
+        while(self.path):
+            a=self.path[0]
+            sleep(0.001)
             self.can.delete(self.ngua)
             self.can.update()
-            sleep(0.5)
+            sleep(0.001)
             self.ngua=self.can.create_image(a[0]*50,a[1]*50,anchor=NW, image=self.png)
             self.can.create_text(a[0]*50+25,a[1]*50+25,text=self.dem,fill="blue") 
             self.dem+=1
             self.can.update()
-    
+            self.path.remove(a)
+        self.finish()
+
+    def finish(self):
+        img= Image.open("Image\\kt.png")
+        img= img.resize((400, 100), Image.ANTIALIAS)
+        img.save("Image\\ktx200.png")
+        self.png = ImageTk.PhotoImage(Image.open("Image\\ktx200.png"))
+        self.can.delete(self.ngua)
+        self.can.create_image(0,150,anchor=NW, image=self.png)
+        self.can.update()
+
     def reset_move(self):
         self.at_dg_chay=False
         self.can.delete(ALL)
